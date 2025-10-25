@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NetQuest Wireless Client Information Form</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+    :root {
+        --primary-color: #007bff; /* NetQuest Blue */
+        --secondary-color: #0056b3; /* Darker Blue */
+        --text-color: #343a40; /* Dark Gray */
+        --light-gray: #e9ecef;
+        --border-color: #ced4da;
+        --background-color: #f8f9fa;
+        --white: #ffffff;
+        --error-color: #dc3545;
+    }
+
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: var(--background-color);
+        margin: 0;
+        padding: 40px 20px;
+        color: var(--text-color);
+        line-height: 1.6;
+    }
+
+    .container {
+        max-width: 1000px;
+        margin: auto;
+        background: var(--white);
+        padding: 40px 50px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        color: var(--primary-color);
+        margin-bottom: 40px;
+        font-weight: 700;
+        font-size: 2.2em;
+        position: relative;
+    }
+
+    h1::after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 4px;
+        background-color: var(--primary-color);
+        margin: 15px auto 0;
+        border-radius: 2px;
+    }
+
+    form {
+        display: grid;
+        gap: 30px;
+    }
+
+    fieldset {
+        border: 1px solid var(--light-gray);
+        border-radius: 8px;
+        padding: 25px;
+        margin-bottom: 30px;
+        transition: border-color 0.3s ease;
+    }
+
+    fieldset:hover {
+        border-color: var(--primary-color);
+    }
+
+    legend {
+        font-size: 1.4em;
+        font-weight: 600;
+        color: var(--primary-color);
+        padding: 0 10px;
+        margin-left: -10px; /* Adjust to sit inside the fieldset border */
+    }
+
+    label {
+        display: block;
+        margin: 15px 0 8px;
+        font-weight: 500;
+        color: var(--text-color);
+        font-size: 0.95em;
+    }
+
+    input:not([type="radio"]):not([type="checkbox"]):not([type="submit"]):not([type="button"]),
+    select,
+    textarea {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        font-size: 1em;
+        box-sizing: border-box;
+        background-color: var(--white);
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        outline: none;
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 80px;
+    }
+
+    .radio-group, .checkbox-group {
+        display: flex;
+        flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        gap: 25px;
+        margin-top: 10px;
+    }
+
+    .radio-group label, .checkbox-group label {
+        display: inline-flex;
+        align-items: center;
+        font-weight: normal;
+        margin: 0;
+        cursor: pointer;
+    }
+
+    .radio-group input[type="radio"], .checkbox-group input[type="checkbox"] {
+        margin-right: 8px;
+        transform: scale(1.1); /* Slightly larger */
+        accent-color: var(--primary-color); /* Customizes checkbox/radio color */
+    }
+
+    button {
+        background-color: var(--primary-color);
+        color: var(--white);
+        padding: 15px 30px;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1em;
+        font-weight: 600;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    button:hover {
+        background-color: var(--secondary-color);
+        box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+    }
+
+    button:active {
+        transform: translateY(1px) scale(0.99);
+    }
+
+    .required::after {
+        content: " *";
+        color: var(--error-color);
+        margin-left: 3px;
+    }
+
+    .honeypot {
+        display: none;
+    }
+
+    #total_display {
+        margin-top: 25px;
+        padding: 15px 20px;
+        background-color: #e0f2f7; /* Lighter blue */
+        border-left: 5px solid var(--primary-color);
+        border-radius: 8px;
+        font-size: 1.2em;
+        font-weight: 700;
+        color: var(--secondary-color);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    #total_display i {
+        color: #f7b237; /* Gold coin icon */
+    }
+
+    .info-text {
+        font-size: 0.9em;
+        color: #6c757d;
+        margin-top: -10px;
+        margin-bottom: 20px;
+        padding-left: 5px;
+    }
+
+    .terms-link {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .terms-link:hover {
+        text-decoration: underline;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .container {
+            padding: 30px;
+        }
+        h1 {
+            font-size: 1.8em;
+        }
+        legend {
+            font-size: 1.2em;
+        }
+        fieldset {
+            padding: 20px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        body {
+            padding: 15px;
+        }
+        .container {
+            padding: 20px;
+        }
+        h1 {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+        }
+        h1::after {
+            width: 60px;
+            height: 3px;
+        }
+        legend {
+            font-size: 1.1em;
+        }
+        .radio-group, .checkbox-group {
+            flex-direction: column;
+            gap: 10px;
+        }
+        button {
+            padding: 12px 20px;
+            font-size: 1em;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1><i class="fas fa-wifi"></i> NetQuest Wireless Client Information Form</h1>
+    <p class="info-text" style="text-align: center; font-size: 1.1em; margin-bottom: 30px;">
+        To begin your new wireless internet service with NetQuest Wireless, kindly provide the required information in the form below.
+    </p>
+
+    <form action="https://formspree.io/f/xovpabwo" method="POST">
+        <input type="hidden" name="_subject" value="New Client Information Submission">
+        <input type="hidden" name="_replyto" value="marlinetquestwireless@gmail.com">
+        <input type="text" name="_gotcha" class="honeypot">
+
+        
+<fieldset>
+            <legend><i class="fas fa-user"></i> Client Details</legend>
+            <label for="fullName" class="required">Full Name</label>
+            <input type="text" id="fullName" name="full_name" required autocomplete="name" placeholder="Enter your full legal name">
+
+            <label for="idNumber" class="required">ID Number</label>
+            <input type="text" id="idNumber" name="id_number" required pattern="\d{13}" title="South African ID number must be 13 digits" placeholder="e.g., 9001015000087">
+
+            <label for="contactNumber" class="required">Contact Number</label>
+            <input type="tel" id="contactNumber" name="contact_number" required autocomplete="tel" placeholder="e.g., +27 (0)12 345 6789">
+
+            <label for="emailAddress" class="required">Email Address</label>
+            <input type="email" id="emailAddress" name="email" required autocomplete="email" placeholder="e.g., yourname@example.com">
+        </fieldset>
+
+        
+<fieldset>
+            <legend><i class="fas fa-home"></i> Residential Address</legend>
+            <label for="streetAddress" class="required">Street Address</label>
+            <input type="text" id="streetAddress" name="street_address" required autocomplete="address-line1" placeholder="e.g., 123 Main Street">
+
+            <label for="suburb">Suburb / Area</label>
+            <input type="text" id="suburb" name="suburb" autocomplete="address-line2" placeholder="e.g., location in town">
+
+            <label for="city" class="required">Town / City</label>
+            <input type="text" id="city" name="city" required autocomplete="address-level2" placeholder="e.g., Williston">
+
+            <label for="postalCode">Postal Code</label>
+            <input type="text" id="postalCode" name="postal_code" autocomplete="postal-code" placeholder="e.g., 8920">
+
+            <label for="province">Province</label>
+            <input type="text" id="province" name="province" autocomplete="address-level1" placeholder="e.g., Northen Cape">
+        </fieldset>
+
+        
+<fieldset>
+            <legend><i class="fas fa-file-invoice-dollar"></i> Billing Details</legend>
+            <label for="billingName">Billing Name (if different)</label>
+            <input type="text" id="billingName" name="billing_name" autocomplete="cc-name" placeholder="Name for billing purposes">
+
+            <label for="billingAddress">Billing Address (if different)</label>
+            <input type="text" id="billingAddress" name="billing_address" autocomplete="street-address" placeholder="Address for billing purposes">
+
+            <label class="required">Account Type</label>
+            <div class="radio-group">
+                <label for="accTypePersonal"><input type="radio" id="accTypePersonal" name="account_type" value="Personal" required> Personal</label>
+                <label for="accTypeBusiness"><input type="radio" id="accTypeBusiness" name="account_type" value="Business"> Business</label>
+            </div>
+
+            <label for="companyName">Company Name (if business account)</label>
+            <input type="text" id="companyName" name="company_name" autocomplete="organization" placeholder="e.g., NetQuest Solutions Inc.">
+        </fieldset>
+
+        
+<fieldset>
+            <legend><i class="fas fa-bank"></i> Banking Information (For Debit Order)</legend>
+            <label for="bankName" class="required">Bank Name</label>
+            <input type="text" id="bankName" name="bank_name" required placeholder="e.g., FNB, Standard Bank">
+
+            <label for="accountHolder" class="required">Account Holder</label>
+            <input type="text" id="accountHolder" name="account_holder" required placeholder="Name on bank account">
+
+            <label for="accountNumber" class="required">Account Number</label>
+            <input type="text" id="accountNumber" name="account_number" required pattern="\d+" title="Account number must be digits only" placeholder="e.g., 1234567890">
+
+            <label class="required">Account Type</label>
+            <div class="radio-group">
+                <label for="accTypeCheque"><input type="radio" id="accTypeCheque" name="bank_account_type" value="Cheque" required> Cheque</label>
+                <label for="accTypeSavings"><input type="radio" id="accTypeSavings" name="bank_account_type" value="Savings"> Savings</label>
+                <label for="accTypeTrans"><input type="radio" id="accTypeTrans" name="bank_account_type" value="Transmission"> Transmission</label>
+            </div>
+
+            <label for="branchCode" class="required">Branch Code</label>
+            <input type="text" id="branchCode" name="branch_code" required pattern="\d{4,6}" title="Branch code must be 4 to 6 digits" placeholder="e.g., 250655">
+        </fieldset>
+
+        
+<fieldset>
+            <legend><i class="fas fa-globe"></i> Internet Package Details</legend>
+
+            <label for="internet_package" class="required">Select Package</label>
+            <select id="internet_package" name="internet_package" required>
+                <option value="" disabled selected>Select a package</option>
+                <option value="Basic Surf - 2/1 Mbps Uncapped R199" data-price="199">Basic Surf – 2 Mbps / 1 Mbps Uncapped – R199</option>
+                <option value="Everyday Home - 4/2 Mbps Uncapped R249" data-price="249">Everyday Home – 4 Mbps / 2 Mbps Uncapped – R249</option>
+                <option value="Home Power - 6/3 Mbps Uncapped R300" data-price="300">Home Power – 6 Mbps / 3 Mbps Uncapped – R300</option>
+                <option value="Streamer - 8/4 Mbps Uncapped R349" data-price="349">Streamer – 8 Mbps / 4 Mbps Uncapped – R349</option>
+                <option value="Streamer+ - 10/5 Mbps Uncapped R400" data-price="400">Streamer+ – 10 Mbps / 5 Mbps Uncapped – R400</option>
+                <option value="Power Pro - 15/7 Mbps Uncapped R499" data-price="499">Power Pro – 15 Mbps / 7 Mbps Uncapped – R499</option>
+                <option value="Business Lite - 10/10 Mbps Uncapped R599" data-price="599">Business Lite – 10 Mbps / 10 Mbps Uncapped – R599</option>
+                <option value="Business Pro - 20/20 Mbps Uncapped R799" data-price="799">Business Pro – 20 Mbps / 20 Mbps Uncapped – R799</option>
+            </select>
+
+            <label for="installationFee" class="required">Installation Fee</label>
+            <select id="installationFee" name="installation_fee" required>
+                <option value="" disabled selected>Select installation option</option>
+                <option value="Williston Hotel R900" data-price="900">Williston Hotel – R900</option>
+                <option value="Williston R2400" data-price="2400">Williston – R2400</option>
+            </select>
+
+            <label class="required">Contract Type</label>
+            <div class="radio-group">
+                <label for="contractMonth"><input type="radio" id="contractMonth" name="contract_type" value="Month-to-Month" required> Month-to-Month</label>
+                <label for="contract6M"><input type="radio" id="contract6M" name="contract_type" value="6 Months"> 6 Months</label>
+                <label for="contract12M"><input type="radio" id="contract12M" name="contract_type" value="12 Months"> 12 Months</label>
+            </div>
+
+            <div id="total_display">
+                <i class="fas fa-coins"></i> Estimated Total: R0.00
+            </div>
+        </fieldset>
+
+        
+<fieldset>
+            <legend><i class="fas fa-wrench"></i> Installation Information</legend>
+            <label for="installDate">Preferred Installation Date</label>
+            <input type="date" id="installDate" name="installation_date">
+
+            <label for="accessNotes">Access Instructions / Notes</label>
+            <textarea id="accessNotes" name="access_notes" rows="3" placeholder="e.g., Gate code is 1234, dog is friendly."></textarea>
+            
+            </fieldset>
+
+        
+<fieldset>
+            <legend><i class="fas fa-headset"></i> Emergency / Support Contact</legend>
+            <label for="emergencyName">Name</label>
+            <input type="text" id="emergencyName" name="emergency_name" placeholder="e.g., Jane Doe">
+
+            <label for="emergencyContact">Contact Number</label>
+            <input type="tel" id="emergencyContact" name="emergency_contact" autocomplete="tel" placeholder="e.g., +27 (0)12 345 6789">
+
+            <label for="emergencyRel">Relationship</label>
+            <input type="text" id="emergencyRel" name="emergency_relationship" placeholder="e.g., Spouse, Manager">
+        </fieldset>
+
+        
+<fieldset>
+            <legend><i class="fas fa-file-signature"></i> Declaration</legend>
+            
+            <label for="declarationName" class="required">Full Name</label>
+            <input type="text" id="declarationName" name="declaration_name" required placeholder="Type your full legal name to acknowledge">
+
+            <label for="signature">Signature (Optional digital signature)</label>
+            <input type="text" id="signature" name="signature" placeholder="For physical forms or digital signature pad">
+
+            <label for="declarationDate">Date</label>
+            <input type="date" id="declarationDate" name="declaration_date">
+        </fieldset>
+
+        <button type="submit"><i class="fas fa-paper-plane"></i> Submit Information Form</button>
+    </form>
+</div>
+
+<script>
+    const packageSelect = document.getElementById('internet_package');
+    const installSelect = document.getElementById('installationFee');
+    const totalDisplay = document.getElementById('total_display');
+
+    function updateTotal() {
+        const pkgPrice = parseFloat(packageSelect.selectedOptions[0]?.dataset.price || 0);
+        const installPrice = parseFloat(installSelect.selectedOptions[0]?.dataset.price || 0);
+        const total = pkgPrice + installPrice;
+
+        const pkgPriceFormatted = pkgPrice.toFixed(2);
+        const installPriceFormatted = installPrice.toFixed(2);
+        const totalFormatted = total.toFixed(2);
+
+        totalDisplay.innerHTML = total > 0
+            ? `<i class="fas fa-coins"></i> Estimated Total: R${totalFormatted} <br> <span style="font-weight: normal; font-size: 0.9em;">(Monthly: R${pkgPriceFormatted} + Once-off Installation: R${installPriceFormatted})</span>`
+            : '<i class="fas fa-coins"></i> Estimated Total: R0.00';
+    }
+
+    packageSelect.addEventListener('change', updateTotal);
+    installSelect.addEventListener('change', updateTotal);
+
+    // Set today's date as default for declaration date
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+        const dd = String(today.getDate()).padStart(2, '0');
+        document.getElementById('declarationDate').value = `${yyyy}-${mm}-${dd}`;
+        updateTotal(); // Calculate total on load as well
+    });
+</script>
+
+</body>
+</html>
